@@ -12,33 +12,31 @@ In this project, I build a Monte Carlo pricing framework for European options an
 - Introduce **stochastic volatility** using the Heston model  
 - Improve efficiency using **variance reduction via control variates**
 
-This combines realistic modeling of market behavior with improved numerical performance.
-
 ---
 
 ## Model
 
 ### Black–Scholes Baseline
 
-\[
+$$
 dS_t = r S_t dt + \sigma S_t dW_t
-\]
+$$
 
 ---
 
 ### Heston Stochastic Volatility Model
 
-\[
+$$
 dS_t = r S_t dt + \sqrt{v_t} S_t dW_t^{(1)}
-\]
+$$
 
-\[
+$$
 dv_t = \kappa(\theta - v_t) dt + \xi \sqrt{v_t} dW_t^{(2)}
-\]
+$$
 
-\[
+$$
 \mathbb{E}[dW_t^{(1)} dW_t^{(2)}] = \rho\, dt
-\]
+$$
 
 ---
 
@@ -46,16 +44,16 @@ dv_t = \kappa(\theta - v_t) dt + \xi \sqrt{v_t} dW_t^{(2)}
 
 ### Monte Carlo Pricing
 - Simulated asset paths under risk-neutral dynamics  
-- Computed discounted payoff:
-  \[
-  C = e^{-rT} \mathbb{E}[(S_T - K)^+]
-  \]
-- Estimated prices using sample averages  
+- Estimated option prices via discounted payoffs  
+
+$$
+C = e^{-rT} \mathbb{E}[(S_T - K)^+]
+$$
 
 ---
 
-### Stochastic Volatility (Heston)
-- Simulated variance process using Euler discretization  
+### Stochastic Volatility
+- Simulated variance using Euler discretization  
 - Used exponential scheme for price evolution  
 - Incorporated correlation between price and volatility  
 
@@ -65,33 +63,31 @@ dv_t = \kappa(\theta - v_t) dt + \xi \sqrt{v_t} dW_t^{(2)}
 
 Used the control variate:
 
-\[
+$$
 Y = e^{-rT} S_T
-\]
+$$
 
 with known expectation:
 
-\[
+$$
 \mathbb{E}[Y] = S_0
-\]
+$$
 
 Constructed estimator:
 
-\[
+$$
 Z = X + c(Y - S_0)
-\]
-
-which reduces variance without biasing the estimate.
+$$
 
 ---
 
 ## Results
 
-### Monte Carlo + Control Variate
+### Variance Reduction
 
 - Variance reduction factor: **~2.9x**  
 - Confidence intervals significantly tightened  
-- Same accuracy achieved with fewer simulation paths  
+- Same accuracy achieved with fewer simulations  
 
 ---
 
@@ -114,8 +110,8 @@ which reduces variance without biasing the estimate.
 
 ## Key Insights
 
-- Stochastic volatility models capture market features such as skew and smile  
-- Monte Carlo methods are flexible but require variance reduction for efficiency  
+- Stochastic volatility captures skew and smile  
+- Monte Carlo requires variance reduction for efficiency  
 - Control variates significantly improve estimator precision  
 - Calibration is an inverse problem and may be ill-conditioned  
 
@@ -124,9 +120,18 @@ which reduces variance without biasing the estimate.
 ## Limitations
 
 - Euler discretization introduces bias  
-- Calibration may not uniquely identify parameters  
-- No jump processes or stochastic interest rates  
-- Assumes continuous price evolution  
+- Parameters may not be uniquely identified  
+- No jump processes or stochastic rates  
+- Continuous-time assumption  
+
+---
+
+## Extensions
+
+- Milstein or exact simulation  
+- Jump-diffusion models  
+- Implied volatility surface calibration  
+- Bayesian methods  
 
 ---
 
@@ -134,11 +139,11 @@ which reduces variance without biasing the estimate.
 
 - `montecarlo.py` — Monte Carlo pricing with control variate  
 - `hestonproject.py` — stochastic volatility simulation and calibration  
-- `Volatility Notes.pdf` — stochastic volatility and Monte Carlo methodology  
+- `Volatility Notes.pdf` — stochastic volatility theory and results  
 - `Calibration.pdf` — calibration algorithm and numerical results  
 
 ---
 
 ## Additional Resources
 
-- Detailed derivations and results are provided in the included PDFs
+- Full derivations and results included in PDFs
