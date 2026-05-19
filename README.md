@@ -1,16 +1,16 @@
 # Monte Carlo Option Pricing and Stochastic Volatility  
-*A quantitative framework for option pricing, stochastic volatility modeling, and variance reduction*
+*A brief work on option pricing, stochastic volatility modeling, and variance reduction*
 
 ---
 
 ## Overview
 
-Monte Carlo methods are widely used for pricing derivatives when closed-form solutions are unavailable, but they can suffer from high variance and computational inefficiency.
+Monte Carlo methods may be used to price derivatives, but may suffer from high levels of variance and computational inefficiency
 
-In this project, I build a Monte Carlo pricing framework for European options and extend it in two key directions:
+In this project, I build a Monte Carlo pricing model for European options and had two main focuses:
 
-- Introduce **stochastic volatility** using the Heston model  
-- Improve efficiency using **variance reduction via control variates**
+- Utilized the Heston framework as a way to implement stochastic volatility models
+- Utilize control variates in order to reduce variance
 
 ---
 
@@ -86,7 +86,7 @@ $$
 ### Variance Reduction
 
 - Variance reduction factor: **~2.9x**  
-- Confidence intervals significantly tightened  
+- Confidence intervals shrank  
 - Same accuracy achieved with fewer simulations  
 
 ---
